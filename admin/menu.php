@@ -1,51 +1,124 @@
 <?php
-// $Id: menu.php, 2004/12/09 seventhseal Exp $
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-$adminmenu[1]['title'] = _MI_STATISTICS_ADMENU2;
-$adminmenu[1]['link'] = "admin/index.php?op=".INFO_GENERAL;
-$adminmenu[2]['title'] = _MI_STATISTICS_ADMENU3;
-$adminmenu[2]['link'] = "admin/index.php?op=".INFO_CREDITS;
-$adminmenu[3]['title'] = _MI_STATISTICS_ADMENU4;
-$adminmenu[3]['link'] = "admin/index.php?op=".INFO_CONFIGURATION;
-$adminmenu[4]['title'] = _MI_STATISTICS_ADMENU5;
-$adminmenu[4]['link'] = "admin/index.php?op=".INFO_MODULES;
-$adminmenu[5]['title'] = _MI_STATISTICS_ADMENU6;
-$adminmenu[5]['link'] = "admin/index.php?op=".INFO_ENVIRONMENT;
-$adminmenu[6]['title'] = _MI_STATISTICS_ADMENU7;
-$adminmenu[6]['link'] = "admin/index.php?op=".INFO_VARIABLES;
-$adminmenu[7]['title'] = _MI_STATISTICS_ADMENU8;
-$adminmenu[7]['link'] = "admin/index.php?op=".INFO_LICENSE;
-$adminmenu[8]['title'] = _MI_STATISTICS_ADMENU9;
-$adminmenu[8]['link'] = "admin/index.php?op=".INFO_ALL;
-$adminmenu[9]['title'] = _MI_STATISTICS_ADMENU10;
-$adminmenu[9]['link'] = "admin/index.php?op=remote_addr";
-$adminmenu[10]['title'] = _MI_STATISTICS_ADMENU11;
-$adminmenu[10]['link'] = "admin/index.php?op=refer";
-$adminmenu[11]['title'] = _MI_STATISTICS_ADMENU12;
-$adminmenu[11]['link'] = "admin/index.php?op=userscreen";
+/**
+ * @copyright      {@link https://xoops.org/ XOOPS Project}
+ * @license        {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package
+ * @since
+ * @author         XOOPS Development Team
+ */
 
-?>
+
+use Xmf\Module\Admin;
+use XoopsModules\Statistics\{
+    Helper
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
+$moduleDirName = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
+$helper = Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
+
+$pathIcon32 = Admin::menuIconPath('');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+}
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_HOME,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU2,
+    'link'  => 'admin/main.php?op=' . INFO_GENERAL,
+    'icon'  => $pathIcon32 . '/alert.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU3,
+    'link'  => 'admin/main.php?op=' . INFO_CREDITS,
+    'icon'  => $pathIcon32 . '/user-icon.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU4,
+    'link'  => 'admin/main.php?op=' . INFO_CONFIGURATION,
+    'icon'  => $pathIcon32 . '/administration.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU5,
+    'link'  => 'admin/main.php?op=' . INFO_MODULES,
+    'icon'  => $pathIcon32 . '/block.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU6,
+    'link'  => 'admin/main.php?op=' . INFO_ENVIRONMENT,
+    'icon'  => $pathIcon32 . '/globe.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU7,
+    'link'  => 'admin/main.php?op=' . INFO_VARIABLES,
+    'icon'  => $pathIcon32 . '/type.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU8,
+    'link'  => 'admin/main.php?op=' . INFO_LICENSE,
+    'icon'  => $pathIcon32 . '/discount.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU9,
+    'link'  => 'admin/main.php?op=' . INFO_ALL,
+    'icon'  => $pathIcon32 . '/photo.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU10,
+    'link'  => 'admin/main.php?op=remote_addr',
+    'icon'  => $pathIcon32 . '/download.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU11,
+    'link'  => 'admin/main.php?op=refer',
+    'icon'  => $pathIcon32 . '/list.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ADMENU12,
+    'link'  => 'admin/main.php?op=userscreen',
+    'icon'  => $pathIcon32 . '/metagen.png',
+];
+
+// Blocks Admin
+$adminmenu[] = [
+    'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS'),
+    'link' => 'admin/blocksadmin.php',
+    'icon' => $pathIcon32 . '/block.png',
+];
+
+
+$adminmenu[] = [
+    'title' => _MI_STATISTICS_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png',
+];
