@@ -19,9 +19,9 @@
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
-$modversion['version']             = 1.00;
-$modversion['module_status']       = 'RC-1';
-$modversion['release_date']        = '2020/11/11';
+$modversion['version']             = '1.0.0';
+$modversion['module_status']       = 'RC-2';
+$modversion['release_date']        = '2022/02/20';
 $modversion['name']                = _MI_STATISTICS_NAME;
 $modversion['description']         = _MI_STATISTICS_DESC;
 $modversion['author']              = 'Seventhseal (John Horne)';
